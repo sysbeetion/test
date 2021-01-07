@@ -1,0 +1,27 @@
+SELECT
+	A .TABLE_NAME,A.COLUMN_NAME, A.comments,B.comments AS "TAB_comments",
+
+ 'A.' ||A.COLUMN_NAME || ' AS "' || REPLACE(A.comments , '在院病人医嘱-' ,'') || '",'
+
+
+FROM
+	user_col_comments A
+LEFT JOIN user_tab_comments B ON A .TABLE_NAME = B.TABLE_NAME
+LEFT JOIN user_tab_columns C ON A .TABLE_NAME = C.TABLE_NAME AND A.COLUMN_NAME = C.COLUMN_NAME
+ WHERE
+ 	A .table_name LIKE '%%'      --表名填在这里
+ AND "A".COLUMN_NAME LIKE '%阻断%'   --列名 填这里
+--  AND "A".comments LIKE '%%'   --列名备注 填这里
+ORDER BY 
+C.COLUMN_ID
+
+
+-- 
+-- user_tables
+-- user_col
+-- user_tab_columns
+-- 
+-- SELECT * from user_tab_columns where table_name = 'EMR_INT_ASSESSMENT_SHEET' ORDER BY COLUMN_ID 
+
+PER100158873
+PER100196554
